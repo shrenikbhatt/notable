@@ -1,0 +1,31 @@
+{
+  "name": "notable",
+  "version": "1.0.0",
+  "description": "A minimalistic, simple note-taking application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shrenikbhatt/notable.git"
+  },
+  "author": "Shrenik Bhatt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shrenikbhatt/notable/issues"
+  },
+  "homepage": "https://github.com/shrenikbhatt/notable#readme",
+  "dependencies": {
+    "next": "^9.4.2",
+    "next-redux-wrapper": "^6.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
+  }
+}
