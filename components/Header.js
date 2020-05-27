@@ -1,8 +1,6 @@
+import { connect } from 'react-redux';
+
 class Header extends React.Component{
-    state = {
-        date: '',
-        title: ''
-    }
 
     componentDidMount(){
         var date = new Date().getDate();
@@ -17,13 +15,26 @@ class Header extends React.Component{
     render(){
         return (
             <form className="w-100">
-                <div className="form-group w-100">
-                    <input type="Text" style={{borderStyle: "none"}} className="form-control" id="title" placeholder="Title" />
-                    <small className="form-text text-muted">{this.state.date}</small>
+                {this.props.note ? (
+                    <div className="form-group w-100">
+                    <input type="Text" style={{borderStyle: "none"}} className="form-control" id="title" placeholder="Title" defaultValue={this.props.note.title} />
+                    <small className="form-text text-muted">{this.props.note.date}</small>
                 </div>
+                ) : (
+                    <div></div>
+                )
+
+                }
+                
             </form>
         )
     }
 }
 
-export default Header;
+const mapStateToProps = state => {
+    return {
+        note: state.notesReducer.note
+    }
+}
+
+export default connect(mapStateToProps)(Header);
