@@ -25,6 +25,7 @@ class Sidebar extends React.Component{
     }
 
     selectNote = (item) => {
+       // console.log(item)
         this.props.selectNote(item);
     }
 

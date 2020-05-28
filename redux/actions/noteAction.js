@@ -3,7 +3,9 @@ export const noteActionTypes = {
     DELETE_NOTE: 'DELETE_NOTE',
     GET_NOTES: 'GET_NOTES',
     ITEMS_LOADING: 'ITEMS_LOADING',
-    SELECT_NOTE: 'SELECT_NOTE'
+    SELECT_NOTE: 'SELECT_NOTE',
+    UPDATE_NOTE: 'UPDATE_NOTE',
+    UPDATE_NOTE_TITLE: 'UPDATE_NOTE_TITLE'
 }
 
 export const addNote = note => (dispatch) => {
@@ -28,10 +30,24 @@ export const getNotes = () => (dispatch) => {
 }
 
 export const selectNote = note => (dispatch) => {
-    dispatch(setItemsLoading())
+    //dispatch(setItemsLoading())
     return dispatch({
         type: noteActionTypes.SELECT_NOTE,
         note
+    })
+}
+
+export const updateNote = body => (dispatch) => {
+    return dispatch({
+        type: noteActionTypes.UPDATE_NOTE,
+        body
+    })
+}
+
+export const updateNoteTitle = title => (dispatch) => {
+    return dispatch({
+        type: noteActionTypes.UPDATE_NOTE_TITLE,
+        title
     })
 }
 

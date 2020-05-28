@@ -1,32 +1,48 @@
 import { connect } from 'react-redux';
+import { updateNoteTitle } from '../redux/actions/noteAction';
 
 class Header extends React.Component{
 
-    componentDidMount(){
-        var date = new Date().getDate();
-        var month = new Date().getMonth();
-        var year = new Date().getFullYear();
+    debounce = (func, delay) => {
+        let deb;
+        return function() {
+            const context = this
+            const args = arguments
+            clearTimeout(deb)
+            deb = setTimeout(() => func.apply(context, args), delay)
+        }
+    }
 
-        this.setState({
-            date: date + '/' + month + '/' + year
-        })
+    onChange = (event) => {
+        event.persist();
+
+        if (!this.debouncedFn) {
+            this.debouncedFn = this.debounce(() => {
+                this.props.updateNoteTitle(event.target.value)
+            }, 3000)
+        }
+
+        this.debouncedFn();
     }
 
     render(){
         return (
-            <form className="w-100">
-                {this.props.note ? (
-                    <div className="form-group w-100">
-                    <input type="Text" style={{borderStyle: "none"}} className="form-control" id="title" placeholder="Title" defaultValue={this.props.note.title} />
-                    <small className="form-text text-muted">{this.props.note.date}</small>
-                </div>
-                ) : (
-                    <div></div>
-                )
+            <div>
 
-                }
-                
-            </form>
+                {this.props.note ? (
+                    <form className="w-100" key={this.props.note.id}>
+                        <div className="form-group w-100">
+                        <input type="Text" style={{borderStyle: "none"}} className="form-control" id="title" placeholder="Title" onChange={this.onChange} defaultValue={this.props.note.title} />
+                        <small className="form-text text-muted">{this.props.note.date}</small>
+                        </div>
+                    </form>
+                    ) : (
+                        <div></div>
+                    )
+
+                    }
+                    
+            </div>
         )
     }
 }
@@ -37,4 +53,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { updateNoteTitle })(Header);
