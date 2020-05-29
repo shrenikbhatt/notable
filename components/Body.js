@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { updateNote } from '../redux/actions/noteAction';
+import { updateNote, updateSaveState } from '../redux/actions/noteAction';
 
 class Body extends React.Component{
     debounce = (func, delay) => {
@@ -15,19 +15,24 @@ class Body extends React.Component{
     onChange = (event) => {
         event.persist();
 
+        if (!this.debouncedFn1) {
+            this.debouncedFn1 = this.debounce(() => {
+                this.props.updateSaveState()
+            }, 600)
+        }
         if (!this.debouncedFn) {
-            this.debouncedFn = this.debounce(() => {
+            this.debouncedFn = this.debounce((event) => {
                 this.props.updateNote(event.target.value)
             }, 3000)
         }
-
-        this.debouncedFn();
+        
+        this.debouncedFn1();
+        this.debouncedFn(event);
     }
 
     render(){
         console.log("rerendered")
         console.log(this.props.note)
-        // document.getElementById('body').value = ""
         return (
             <div className="w-100 h-100">
                 {this.props.note ? (
@@ -58,4 +63,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { updateNote })(Body);
+export default connect(mapStateToProps, { updateNote, updateSaveState })(Body);

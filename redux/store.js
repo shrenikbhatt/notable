@@ -3,6 +3,7 @@ import { HYDRATE, createWrapper } from 'next-redux-wrapper';
 import thunkMiddleware from 'redux-thunk';
 
 import notesReducer from './reducers/noteReducer'
+import userReducer from './reducers/userReducer'
 
 
 const bindMiddleware = (middlware) => {
@@ -14,7 +15,8 @@ const bindMiddleware = (middlware) => {
 }
 
 const combinedReducers = combineReducers({
-    notesReducer
+    notesReducer,
+    userReducer
 })
 
 const reducer = (state, action) => {

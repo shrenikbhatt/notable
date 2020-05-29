@@ -5,7 +5,8 @@ export const noteActionTypes = {
     ITEMS_LOADING: 'ITEMS_LOADING',
     SELECT_NOTE: 'SELECT_NOTE',
     UPDATE_NOTE: 'UPDATE_NOTE',
-    UPDATE_NOTE_TITLE: 'UPDATE_NOTE_TITLE'
+    UPDATE_NOTE_TITLE: 'UPDATE_NOTE_TITLE',
+    UPDATE_SAVESTATE: 'UPDATE_SAVESTATE'
 }
 
 export const addNote = note => (dispatch) => {
@@ -48,6 +49,12 @@ export const updateNoteTitle = title => (dispatch) => {
     return dispatch({
         type: noteActionTypes.UPDATE_NOTE_TITLE,
         title
+    })
+}
+
+export const updateSaveState = () => (dispatch) => {
+    return dispatch({
+        type: noteActionTypes.UPDATE_SAVESTATE
     })
 }
 
