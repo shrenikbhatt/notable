@@ -31,8 +31,6 @@ class Body extends React.Component{
     }
 
     render(){
-        console.log("rerendered")
-        console.log(this.props.note)
         return (
             <div className="w-100 h-100">
                 {this.props.note ? (

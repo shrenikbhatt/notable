@@ -21,22 +21,22 @@ class Verification extends React.Component{
 
     submitHandler = (e) => {
         e.preventDefault();
-        console.log(this.state)
+        this.props.loginUser(this.state)
     }
 
     render() {
         return(
             <form>
                 <div className="form-group">
-                    <label for="InputUsername1">Username</label>
+                    <label>Username</label>
                     <input type="text" className="form-control" id="InputUsername1" aria-describedby="textHelp" value={this.state.username} onChange={this.usernameHandler}/>
                 </div>
-                <div class="form-group">
-                    <label for="InputPassword1">Password</label>
+                <div className="form-group">
+                    <label>Password</label>
                     <input type="password" className="form-control" id="InputPassword1" value={this.state.password} onChange={this.passwordHandler} />
                     <small className="form-text text-muted">Don't have an account? <a href="#">Register</a></small>
                 </div>
-                <button type="submit" onClick={this.submitHandler} class="btn btn-primary">Submit</button>
+                <button type="submit" onClick={this.submitHandler} className="btn btn-primary">Submit</button>
             </form>
         )
     }

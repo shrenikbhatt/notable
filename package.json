@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next",
+    "dev": "node ssr-server.js",
     "build": "next build",
     "start": "next start"
   },
@@ -20,8 +20,11 @@
   },
   "homepage": "https://github.com/shrenikbhatt/notable#readme",
   "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
     "next": "^9.4.2",
     "next-redux-wrapper": "^6.0.0",
+    "pg": "^8.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",

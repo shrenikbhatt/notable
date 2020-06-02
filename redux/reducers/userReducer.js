@@ -2,7 +2,8 @@ import { userActionTypes } from '../actions/userActions';
 
 const initialState = {
     user: null,
-    verified: false
+    verified: false,
+    error: false
 }
 
 export default function userReducer(state=initialState, action){
@@ -18,6 +19,11 @@ export default function userReducer(state=initialState, action){
                 ...state,
                 verified: true,
                 user: action.user
+            }
+        case userActionTypes.LOGIN_FAIL:
+            return{
+                ...state,
+                error: true
             }
         default:
             return state
