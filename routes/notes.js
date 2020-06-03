@@ -47,4 +47,16 @@ router.delete('/:id', (req, res) => {
     })
 })
 
+router.put('/:id', (req, res) => {
+    values = [req.body.title, req.body.body, req.params.id]
+    client.query('UPDATE notes SET title=$1, body=$2 WHERE note_id=$3' , values, (error, results) => {
+        if (error){
+            console.log(error);
+        }
+        else{
+            res.status(200).json({msg: "Entry has been updated"})
+        }
+    })
+})
+
 module.exports = router

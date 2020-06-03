@@ -21,7 +21,9 @@
   "homepage": "https://github.com/shrenikbhatt/notable#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "bcrypt": "^4.0.1",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "next": "^9.4.2",
     "next-redux-wrapper": "^6.0.0",
     "pg": "^8.2.1",
