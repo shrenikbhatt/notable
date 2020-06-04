@@ -1,5 +1,8 @@
 import { connect } from 'react-redux';
 import { addNote, getNotes, selectNote, deleteNote } from '../redux/actions/noteAction';
+import { logoutUser } from '../redux/actions/userActions';
+const jwt = require("jsonwebtoken");
+
 
 class Sidebar extends React.Component{
     componentDidMount(){
@@ -11,11 +14,13 @@ class Sidebar extends React.Component{
         var month = new Date().getMonth();
         var year = new Date().getFullYear();
 
+        const author = jwt.verify(localStorage.getItem("token"), "n0ta6l3S3cr3t")
+
         const newNote = {
-            id: Date.now(),
             date: date + '/' + month + '/' + year,
             title: "New Note",
-            body: ""
+            body: "",
+            author: author.username
         }
         this.props.addNote(newNote);
     }
@@ -39,12 +44,15 @@ class Sidebar extends React.Component{
         else this.items = <div></div>
         return(
             <div className="w-100">
-                <div className="w-100 text-center">
-                    <h2 className="text-white">Notable</h2>
+                <div className="w-100">
+                    <button className="btn btn-primary btn-sm float-left" onClick={() => this.props.logoutUser()}>Logout</button>
+                    <div className="w-100 text-center">
+                       <h2 className="text-white">Notable</h2>                    
+                    </div>
                 </div>
                 <div className="w-100 text-center">
                     <button className="btn btn-outline-info m-1" onClick={() => this.addNote()}>New</button>
-                    <button className="btn btn-outline-danger m-1" onClick={() =>this.deleteNote()}>Delete</button>
+                    <button disabled={!this.props.note} className="btn btn-outline-danger m-1" onClick={() =>this.deleteNote()}>Delete</button>
                 </div>
                 <div className="w-100">
                     {this.items}
@@ -64,4 +72,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {getNotes, addNote, selectNote, deleteNote})(Sidebar);
+export default connect(mapStateToProps, {getNotes, addNote, selectNote, deleteNote, logoutUser})(Sidebar);

@@ -22,7 +22,7 @@ class Body extends React.Component{
         }
         if (!this.debouncedFn) {
             this.debouncedFn = this.debounce((event) => {
-                this.props.updateNote(event.target.value)
+                this.props.updateNote(event.target.value, this.props.note.note_id)
             }, 3000)
         }
         
@@ -34,7 +34,7 @@ class Body extends React.Component{
         return (
             <div className="w-100 h-100">
                 {this.props.note ? (
-                <form className="w-100 h-100" key={this.props.note.id}>
+                <form className="w-100 h-100" key={this.props.note.note_id}>
                 
                     <div className="form-group w-100 h-100">
                         <textarea style={{borderStyle: "none", borderTop: "1px solid black"}} className="form-control h-100" id="body" placeholder="Body" onChange={this.onChange} defaultValue={this.props.note.body}/>
@@ -43,10 +43,6 @@ class Body extends React.Component{
                 ) : (
                     <div></div>
                 )
-
-                
-                
-                
                 }
             </div>
             

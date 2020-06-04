@@ -39,7 +39,7 @@ const Index = (props) => {
 }
 const mapStateToProps = state => {
 	return{
-		verified: state.userReducer.verified
+		verified: (state.userReducer.verified && !state.notesReducer.error)
 	}
 }
 

@@ -4,31 +4,31 @@ const initialState = {
     notes: [],
     note: null,
     loading: false,
-    error: null,
+    error: false,
     saveState: ""
 }
 
 export default function notesReducer(state=initialState, action) {
     switch (action.type){
-        case noteActionTypes.GET_NOTE:
+        case noteActionTypes.GET_NOTES:
             return  {
                 ...state,
-                notes: action.notes,
+                notes: action.data,
                 loading: false,
-                error: null
+                error: false
             }
         case noteActionTypes.ADD_NOTE:
             return {
                 ...state,
-                notes: [action.note, ...state.notes],
-                note: action.note,
+                notes: [action.data.results.rows[0], ...state.notes],
+                note: action.data.results.rows[0],
                 saveState: "Saved"
             }
         case noteActionTypes.DELETE_NOTE:
             return {
                 ...state,
                 notes: state.notes.filter(
-                    note => note.id !== action.note.id
+                    note => note.note_id !== action.note.note_id
                 ),
                 note: null
                 
@@ -36,13 +36,13 @@ export default function notesReducer(state=initialState, action) {
         case noteActionTypes.SELECT_NOTE:
             return{
                 ...state,
-                note: action.note,
+                note: action.data,
                 saveState: "Saved"
             }
         case noteActionTypes.UPDATE_NOTE:
             const newNotes = [...state.notes]
-            const i = newNotes.indexOf(state.note)
-            newNotes[i].body = action.body
+            const i = newNotes.find(note => note.note_id == state.note.note_id)
+            i.body = action.body1
             return{
                 ...state,
                 notes: newNotes,
@@ -50,11 +50,17 @@ export default function notesReducer(state=initialState, action) {
             }
         case noteActionTypes.UPDATE_NOTE_TITLE:
             const newNotes1 = [...state.notes]
-            const i1 = newNotes1.indexOf(state.note)
-            newNotes1[i1].title = action.title
+            const j = newNotes1.find(note => note.note_id == state.note.note_id)
+            j.title = action.title1
             return{
                 ...state,
                 notes: newNotes1
+            }
+        case noteActionTypes.NOTE_ERROR:
+            localStorage.removeItem("token")
+            return{
+                ...state,
+                error: true
             }
         case noteActionTypes.UPDATE_SAVESTATE:
             return{
