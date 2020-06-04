@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 class Verification extends React.Component{
     state = {
         username: "",
-        password: ""
+        password: "",
+        confirm_password: "",
+        register: false
     }
 
     usernameHandler = (e) => {
@@ -19,13 +21,60 @@ class Verification extends React.Component{
         })
     }
 
+    confirm_passwordHandler = (e) => {
+        this.setState({
+            confirm_password: e.target.value
+        })
+    }
+
     submitHandler = (e) => {
         e.preventDefault();
-        this.props.loginUser(this.state)
+        if (this.state.register){
+            const data = {
+                username: this.state.username,
+                password: this.state.password,
+                confirm_password: this.state.confirm_password
+            }
+            this.props.registerUser(data)
+        }
+        else{
+            const data = {
+                username: this.state.username,
+                password: this.state.password,
+            }
+            this.props.loginUser(data)
+        }
+    }
+    
+    viewHandler = () => {
+        this.setState({
+            register: !this.state.register
+        })
     }
 
     render() {
         return(
+            <div>
+                {this.state.register? (
+                    <form>
+                    <div className="form-group">
+                        <label>Username</label>
+                        <input type="text" className="form-control" id="InputUsername1" aria-describedby="textHelp" value={this.state.username} onChange={this.usernameHandler}/>
+                    </div>
+                    <div className="form-group">
+                        <label>Password</label>
+                        <input type="password" className="form-control" id="InputPassword1" value={this.state.password} onChange={this.passwordHandler} />
+                    </div>
+                    <div className="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" className="form-control" id="InputPassword2" value={this.state.confirm_password} onChange={this.confirm_passwordHandler} />
+                        <small className="form-text text-muted">Already have an account? <a href="#" onClick={this.viewHandler}>Login</a></small>
+                    </div>
+                    <button type="submit" onClick={this.submitHandler} className="btn btn-primary">Submit</button>
+                </form>
+
+                ) : (
+
             <form>
                 <div className="form-group">
                     <label>Username</label>
@@ -34,10 +83,15 @@ class Verification extends React.Component{
                 <div className="form-group">
                     <label>Password</label>
                     <input type="password" className="form-control" id="InputPassword1" value={this.state.password} onChange={this.passwordHandler} />
-                    <small className="form-text text-muted">Don't have an account? <a href="#">Register</a></small>
+                    <small className="form-text text-muted">Don't have an account? <a href="#" onClick={this.viewHandler}>Register</a></small>
                 </div>
                 <button type="submit" onClick={this.submitHandler} className="btn btn-primary">Submit</button>
             </form>
+                )
+
+                }
+
+            </div>
         )
     }
 }
