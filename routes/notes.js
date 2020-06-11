@@ -38,7 +38,6 @@ router.post('/', auth, (req, res) => {
 })
 
 router.delete('/:id', auth, (req, res) => {
-    console.log("here")
     client.query('DELETE FROM notes WHERE (note_id=$1 AND author=$2)', [req.params.id, req.user.username], (error, results) => {
         if (error){
             return res.status(400).json({msg: "Could not delete note."})

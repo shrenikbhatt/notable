@@ -43,7 +43,7 @@ class Sidebar extends React.Component{
         }
         else this.items = <div></div>
         return(
-            <div className="w-100">
+            <div className="w-100" style={{height: "100vh"}}>
                 <div className="w-100">
                     <button className="btn btn-primary btn-sm" onClick={() => this.props.logoutUser()}>Logout</button>
                 </div>
@@ -54,7 +54,7 @@ class Sidebar extends React.Component{
                     <button className="btn btn-outline-info m-1" onClick={() => this.addNote()}>New</button>
                     <button disabled={!this.props.note} className="btn btn-outline-danger m-1" onClick={() =>this.deleteNote()}>Delete</button>
                 </div>
-                <div className="w-100 mt-2">
+                <div className="w-100 pt-1">
                     {this.items}
                 </div>
             </div>

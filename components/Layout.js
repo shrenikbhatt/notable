@@ -17,7 +17,6 @@ const Layout = (props) => {
             <style global jsx>
                 {`
                     html, body {
-                        
                     }
                 `}
             </style>
