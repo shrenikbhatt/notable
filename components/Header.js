@@ -20,7 +20,7 @@ class Header extends React.Component{
         if (!this.debouncedFn) {
             this.debouncedFn = this.debounce((event) => {
                 this.props.updateNoteTitle(event.target.value, this.props.note.note_id)
-            }, 1000)
+            }, 500)
         }
         this.debouncedFn(event);
     }

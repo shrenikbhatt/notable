@@ -38,26 +38,24 @@ class Sidebar extends React.Component{
         this.items;
         if (this.props.notes){
             this.items = [...this.props.notes].reverse().map((item, key) =>
-                <button className="btn btn-outline-light w-100 mb-1 mt-1" onClick={() => this.selectNote(item)} key={key}>{item.title}</button>
+                <button className="btn btn-outline-light w-100" style={{borderStyle: "none", borderBottom: "1px solid white", borderTop: "1px solid white"}} onClick={() => this.selectNote(item)} key={key}>{item.title}</button>
             )
         }
         else this.items = <div></div>
         return(
             <div className="w-100">
                 <div className="w-100">
-                    <button className="btn btn-primary btn-sm float-left" onClick={() => this.props.logoutUser()}>Logout</button>
-                    <div className="w-100 text-center">
-                       <h2 className="text-white">Notable</h2>                    
-                    </div>
+                    <button className="btn btn-primary btn-sm" onClick={() => this.props.logoutUser()}>Logout</button>
+                </div>
+                <div className="w-100 text-center">
+                    <h2 className="text-white">Notable</h2>                    
                 </div>
                 <div className="w-100 text-center">
                     <button className="btn btn-outline-info m-1" onClick={() => this.addNote()}>New</button>
                     <button disabled={!this.props.note} className="btn btn-outline-danger m-1" onClick={() =>this.deleteNote()}>Delete</button>
                 </div>
-                <div className="w-100">
+                <div className="w-100 mt-2">
                     {this.items}
-                    {/* <button className="btn btn-outline-light w-100 mb-1">Note 1</button> */}
-
                 </div>
             </div>
             

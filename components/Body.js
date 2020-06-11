@@ -23,7 +23,7 @@ class Body extends React.Component{
         if (!this.debouncedFn) {
             this.debouncedFn = this.debounce((event) => {
                 this.props.updateNote(event.target.value, this.props.note.note_id)
-            }, 3000)
+            }, 1000)
         }
         
         this.debouncedFn1();

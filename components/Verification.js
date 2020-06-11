@@ -54,7 +54,10 @@ class Verification extends React.Component{
 
     render() {
         return(
-            <div>
+            <div className="container w-100" style={{height: "100vh"}}>
+                <div className="row justify-content-center align-items-center" style={{height: "100vh"}}>
+                    <div className="col-6 p-4" style={{boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"}}>
+
                 {this.state.register? (
                     <form>
                     <div className="form-group">
@@ -70,7 +73,7 @@ class Verification extends React.Component{
                         <input type="password" className="form-control" id="InputPassword2" value={this.state.confirm_password} onChange={this.confirm_passwordHandler} />
                         <small className="form-text text-muted">Already have an account? <a href="#" onClick={this.viewHandler}>Login</a></small>
                     </div>
-                    <button type="submit" onClick={this.submitHandler} className="btn btn-primary">Submit</button>
+                    <button type="submit" onClick={this.submitHandler} className="btn btn-outline-primary">Submit</button>
                 </form>
 
                 ) : (
@@ -85,11 +88,13 @@ class Verification extends React.Component{
                     <input type="password" className="form-control" id="InputPassword1" value={this.state.password} onChange={this.passwordHandler} />
                     <small className="form-text text-muted">Don't have an account? <a href="#" onClick={this.viewHandler}>Register</a></small>
                 </div>
-                <button type="submit" onClick={this.submitHandler} className="btn btn-primary">Submit</button>
+                <button type="submit" onClick={this.submitHandler} className="btn btn-outline-primary">Submit</button>
             </form>
                 )
 
                 }
+                    </div>
+                </div>
 
             </div>
         )
